@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:fragment="script">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/jquery.min.js"></script>
+    <script src="/assets/assetsAddProduct/assetsCP/js/popper.min.js"></script>
+    <script src="/assets/assetsAddProduct/assetsCP/js/bootstrap.min.js"></script>
+    <!-- Appear JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/jquery.appear.js"></script>
+    <!-- Countdown JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/countdown.min.js"></script>
+    <!-- Counterup JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/waypoints.min.js"></script>
+    <script src="/assets/assetsAddProduct/assetsCP/js/jquery.counterup.min.js"></script>
+    <!-- Wow JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/wow.min.js"></script>
+    <!-- Apexcharts JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/apexcharts.js"></script>
+    <!-- Slick JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/slick.min.js"></script>
+    <!-- Select2 JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/select2.min.js"></script>
+    <!-- Owl Carousel JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/owl.carousel.min.js"></script>
+    <!-- Magnific Popup JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/jquery.magnific-popup.min.js"></script>
+    <!-- Smooth Scrollbar JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/smooth-scrollbar.js"></script>
+    <!-- lottie JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/lottie.js"></script>
+    <!-- am core JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/core.js"></script>
+    <!-- am charts JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/charts.js"></script>
+    <!-- am animated JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/animated.js"></script>
+    <!-- am kelly JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/kelly.js"></script>
+    <!-- am maps JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/maps.js"></script>
+    <!-- am worldLow JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/worldLow.js"></script>
+    <!-- Style Customizer -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/style-customizer.js"></script>
+    <!-- Chart Custom JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/chart-custom.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="/assets/assetsAddProduct/assetsCP/js/custom.js"></script>
+    <script src="/assets/assetsAddProduct/toastie/dist/js/iziToast.min.js"></script>
+<!--    <script src="/assets/assetsAddProduct/assetsCP/js/AppBase.js"></script>-->
+    <script src="/assets/assetsAddProduct/jquery/jquery.validate-1.19.5.min.js"></script>
+    <script src="/assets/assetsAddProduct/sweetalert2/sweetalert2@11.js"></script>
+
+
+
+
+
+<!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+    <script src="/assets/js/demo.js"></script>
+
+    <script src="/assets/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js"></script>
+    <!-- JS Front -->
+    <script src="/assets/js/vendor.min.js"></script>
+
+
+
+    <!-- JS Front -->
+    <script src="/assets/js/theme.min.js"></script>
+
+    <!-- JS Plugins Init. -->
+    <script>
+        $(document).on('ready', function () {
+            // ONLY DEV
+            // =======================================================
+
+            if (window.localStorage.getItem('hs-builder-popover') === null) {
+                $('#builderPopover').popover('show')
+                    .on('shown.bs.popover', function () {
+                        $('.popover').last().addClass('popover-dark')
+                    });
+
+                $(document).on('click', '#closeBuilderPopover' , function() {
+                    window.localStorage.setItem('hs-builder-popover', true);
+                    $('#builderPopover').popover('dispose');
+                });
+            } else {
+                $('#builderPopover').on('show.bs.popover', function () {
+                    return false
+                });
+            }
+
+            // END ONLY DEV
+            // =======================================================
+
+
+            // BUILDER TOGGLE INVOKER
+            // =======================================================
+            $('.js-navbar-vertical-aside-toggle-invoker').click(function () {
+                $('.js-navbar-vertical-aside-toggle-invoker i').tooltip('hide');
+            });
+
+
+            // INITIALIZATION OF MEGA MENU
+            // =======================================================
+            var megaMenu = new HSMegaMenu($('.js-mega-menu'), {
+                desktop: {
+                    position: 'left'
+                }
+            }).init();
+
+
+
+            // INITIALIZATION OF NAVBAR VERTICAL NAVIGATION
+            // =======================================================
+            var sidebar = $('.js-navbar-vertical-aside').hsSideNav();
+
+
+            // INITIALIZATION OF TOOLTIP IN NAVBAR VERTICAL MENU
+            // =======================================================
+            $('.js-nav-tooltip-link').tooltip({ boundary: 'window' })
+
+            $(".js-nav-tooltip-link").on("show.bs.tooltip", function(e) {
+                if (!$("body").hasClass("navbar-vertical-aside-mini-mode")) {
+                    return false;
+                }
+            });
+
+
+            // INITIALIZATION OF UNFOLD
+            // =======================================================
+            $('.js-hs-unfold-invoker').each(function () {
+                var unfold = new HSUnfold($(this)).init();
+            });
+
+
+            // INITIALIZATION OF FORM SEARCH
+            // =======================================================
+            $('.js-form-search').each(function () {
+                new HSFormSearch($(this)).init()
+            });
+
+
+            // INITIALIZATION OF SHOW PASSWORD
+            // =======================================================
+            $('.js-toggle-password').each(function () {
+                new HSTogglePassword(this).init()
+            });
+
+
+            // INITIALIZATION OF FILE ATTACH
+            // =======================================================
+            $('.js-file-attach').each(function () {
+                var customFile = new HSFileAttach($(this)).init();
+            });
+
+
+            // INITIALIZATION OF TABS
+            // =======================================================
+            $('.js-tabs-to-dropdown').each(function () {
+                var transformTabsToBtn = new HSTransformTabsToBtn($(this)).init();
+            });
+
+
+            // INITIALIZATION OF STEP FORM
+            // =======================================================
+            $('.js-step-form').each(function () {
+                var stepForm = new HSStepForm($(this), {
+                    finish: function() {
+                        $("#addUserStepFormProgress").hide();
+                        $("#addUserStepFormContent").hide();
+                        $("#successMessageContent").show();
+                    }
+                }).init();
+            });
+
+
+            // INITIALIZATION OF MASKED INPUT
+            // =======================================================
+            $('.js-masked-input').each(function () {
+                var mask = $.HSCore.components.HSMask.init($(this));
+            });
+
+
+            // INITIALIZATION OF SELECT2
+            // =======================================================
+            $('.js-select2-custom').each(function () {
+                var select2 = $.HSCore.components.HSSelect2.init($(this));
+            });
+
+
+            // INITIALIZATION OF COUNTERS
+            // =======================================================
+            $('.js-counter').each(function() {
+                var counter = new HSCounter($(this)).init();
+            });
+
+
+            // INITIALIZATION OF DATATABLES
+            // =======================================================
+            var datatable = $.HSCore.components.HSDatatables.init($('#datatable'), {
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        className: 'd-none'
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'd-none'
+                    },
+                    {
+                        extend: 'csv',
+                        className: 'd-none'
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'd-none'
+                    },
+                    {
+                        extend: 'print',
+                        className: 'd-none'
+                    },
+                ],
+                select: {
+                    style: 'multi',
+                    selector: 'td:first-child input[type="checkbox"]',
+                    classMap: {
+                        checkAll: '#datatableCheckAll',
+                        counter: '#datatableCounter',
+                        counterInfo: '#datatableCounterInfo'
+                    }
+                },
+                language: {
+                    zeroRecords: '<div class="text-center p-4">' +
+                        '<img class="mb-3" src=".//assets/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">' +
+                        '<p class="mb-0">No data to show</p>' +
+                        '</div>'
+                }
+            });
+
+            $('#export-copy').click(function() {
+                datatable.button('.buttons-copy').trigger()
+            });
+
+            $('#export-excel').click(function() {
+                datatable.button('.buttons-excel').trigger()
+            });
+
+            $('#export-csv').click(function() {
+                datatable.button('.buttons-csv').trigger()
+            });
+
+            $('#export-pdf').click(function() {
+                datatable.button('.buttons-pdf').trigger()
+            });
+
+            $('#export-print').click(function() {
+                datatable.button('.buttons-print').trigger()
+            });
+
+            $('.js-datatable-filter').on('change', function() {
+                var $this = $(this),
+                    elVal = $this.val(),
+                    targetColumnIndex = $this.data('target-column-index');
+
+                datatable.column(targetColumnIndex).search(elVal).draw();
+            });
+
+            $('#datatableSearch').on('mouseup', function (e) {
+                var $input = $(this),
+                    oldValue = $input.val();
+
+                if (oldValue == "") return;
+
+                setTimeout(function(){
+                    var newValue = $input.val();
+
+                    if (newValue == ""){
+                        // Gotcha
+                        datatable.search('').draw();
+                    }
+                }, 1);
+            });
+
+
+            // INITIALIZATION OF QUICK VIEW POPOVER
+            // =======================================================
+            $('#editUserPopover').popover('show');
+
+            $(document).on('click', '#closeEditUserPopover' , function() {
+                $('#editUserPopover').popover('dispose');
+            });
+
+            $('#editUserModal').on('show.bs.modal', function() {
+                $('#editUserPopover').popover('dispose');
+            });
+
+
+            // DARK POPOVER
+            // =======================================================
+            $('[data-toggle="popover-dark"]').on('shown.bs.popover', function () {
+                $('.popover').last().addClass('popover-dark')
+            })
+        });
+    </script>
+
+<!--    <script type="text/javascript" src="/assets/js/jquery-3.6.0.js"></script>-->
+    <script type="text/javascript" src="/assets/js/sweetalert2.min.js"></script>
+    <script type="text/javascript" src="/assets/iziToast/iziToast-1.4.0.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.validate-1.19.3.min.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/assets/js/popper-v1.16.0.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.number.js"></script>
+
+    <!-- IE Support -->
+<!--    <script>-->
+<!--        if (/MSIE /d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src=".//assets/vendor/babel-polyfill/polyfill.min.js"><//script>');-->
+<!--    </script>-->
+</th:block>

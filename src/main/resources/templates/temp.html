@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index</title>
+  <link rel="stylesheet" href="/assets/bootstrap/v5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/fontawesome/v5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/assets/sweetalert2/sweetalert2.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style1.css">
+
+  <link rel="stylesheet" href="/assets/css/style-themes.scss9d45.css">
+  <link rel="stylesheet" href="/assets/css/cart.css">
+  <style>
+    .fl {
+      float: left;
+    }
+
+    .mgr-10 {
+      margin: 10px;
+    }
+  </style>
+
+  <th:block th:replace="/layout/head :: head"/>
+</head>
+
+<body>
+
+<th:block th:replace="layout/builder :: builder"/>
+<th:block th:replace="layout/headerMain :: headerMain"/>
+<th:block th:replace="layout/plugin :: plugin"/>
+<th:block th:replace="layout/asidebar :: asidebar"/>
+<th:block th:replace="layout/searchForm :: search"/>
+<th:block th:replace="layout/asidebarCompact :: sidebarCompact"/>
+
+<main id="content" role="main" class="main">
+
+
+  <header>
+    <div class="row">
+      <div class="col-sm-5">
+        <h1 class="m-2">MARKETPLACE</h1>
+      </div>
+      <div class="col-sm-7">
+        <div class="list-unstyled topnav-menu float-right mb-0" style="float: right; margin-top: 5px; margin-right: 10px">
+          <span class="dropdown notification-list">
+            <a class="nav-link mr-0" id="btnShowCart" href="#" style="display: inline-block;">
+              <i class="fa fa-cart-arrow-down" aria-hidden="true" style="font-size: 35px;"></i>
+            </a>
+          </span>
+          <span>
+            <button class="btn btn-danger" id="btnCreateProduct" style="display: inline-block; margin-bottom: 15px; margin-right: 20px">Add product</button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mainHeader">
+      <div class="header-wrap-action">
+        <div class="header-action">
+          <div class="header-action-item">
+            <div class="header-action_dropdown hide" id="modalCarts">
+              <div class="header-dropdown_content">
+                <div class="sitenav-content sitenav-cart ">
+                  <div class="sitenav-content__title">
+
+                    <p class="txt-title">Giỏ hàng</p>
+                  </div>
+                  <div class="sitenav-content__block cart-view">
+                    <div class="cart-view-scroll sitenav-boxscroll">
+                      <div class="table-clone-cart">
+                      </div>
+                    </div>
+                    <div id="cart-view-line" class="cart-view-line">
+                    </div>
+                    <div class="cart-view-total">
+                      <div class="mini-cart">
+                        <div class="mini-cart__total">
+                          <div class="mnc-total mnc-total-text">TỔNG TIỀN:</div>
+                          <div class="mnc-total mnc-total-price" id="total-view-cart"></div>
+                        </div>
+                        <div class="mini-cart__button">
+                          <div class="mnc-cta">
+                            <button id="btnCheckout" class="linktocart button btnred">Thanh toán</button>
+                          </div>
+                          <div class="mnc-cta">
+                            <a class="linktocheckout button btnred" href="/gio-hang">Xem giỏ hàng</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="" class="box-body">
+    <div class="card fl mgr-10" style="width: 18rem;">
+      <img src="https://res.cloudinary.com/toanphat/image/upload/c_limit,w_288,h_216,q_100/product_images/464663e2-db3a-4d25-b432-fd86ebfd43a6.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer id="footer">
+
+  </footer>
+
+
+
+</main>
+
+<script src="/assets/jquery/jquery-v3.6.0.min.js"></script>
+<script src="/assets/jquery/jquery.validate.min.js"></script>
+<script src="/assets/bootstrap/v5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/sweetalert2/sweetalert2.all.min.js"></script>
+
+<th:block th:replace="/layout/script :: script"/>
+
+
+<script src="/assets/js/app.base.js"></script>
+
+<script>
+  const page = {
+    urls: {
+      getAllProducts: AppBase.API_PRODUCT,
+      getAllCartItems: AppBase.API_CART,
+      checkout: AppBase.API_CART + '/pay',
+      addCartItem: AppBase.API_CART + '/add-item',
+      minusCartItem: AppBase.API_CART + '/minus-item',
+      changeQuantityCartItem: AppBase.API_CART + '/change-quantity-item',
+      deleteCartItem: AppBase.API_CART + '/delete-item',
+      saveNewProduct: AppBase.API_PRODUCT
+    },
+    elements: {},
+    commands: {},
+    dialogs: {
+      elements: {},
+      commands: {}
+    }
+  }
+
+
+  page.elements.btnShowCart = $("#btnShowCart");
+  page.elements.modalCarts = $("#modalCarts");
+
+  page.elements.content = $("#content");
+
+  let isOpenCart = false;
+
+
+  page.commands.getAllProducts = () => {
+    $.ajax({
+      type: "GET",
+      url: page.urls.getAllProducts
+    })
+            .done((data) => {
+              page.elements.content.empty();
+
+              $.each(data, (i, item) => {
+                let str = AppBase.renderProductShopping(item);
+                page.elements.content.prepend(str)
+              })
+
+              page.commands.handleAddCart();
+            })
+            .fail((jqXHR) => {
+              AppBase.showErrorAlert(AppBase.AlertMessageEn.ERROR_LOADING_PRODUCT);
+            })
+  }
+
+  page.commands.handleAddCart = () => {
+    $('.add-cart').on('click', function () {
+      let productId = $(this).data("id");
+
+      let obj = {
+        productId,
+        quantity: 1
+      }
+
+      page.commands.addCartItem(obj)
+              .then(() => {
+                AppBase.IziToast.showSuccessAlert('Thêm sản phẩm vào giỏ hàng thành công')
+              })
+              .catch(() => {
+                AppBase.IziToast.showErrorAlert('Thêm sản phẩm vào giỏ hàng thất bại');
+              });
+
+    })
+
+  }
+
+  page.commands.addCartItem = (obj) => {
+    return $.ajax({
+      type: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      url: page.urls.addCartItem,
+      data: JSON.stringify(obj)
+    })
+  }
+
+
+  page.commands.minusCartItem = (obj) => {
+    return $.ajax({
+      type: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      url: page.urls.minusCartItem,
+      data: JSON.stringify(obj)
+    })
+  }
+
+  page.commands.changeQuantityCartItem = (obj) => {
+    return $.ajax({
+      type: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      url: page.urls.changeQuantityCartItem,
+      data: JSON.stringify(obj)
+    })
+  }
+
+  page.commands.deleteCartItem = (obj) => {
+    return $.ajax({
+      type: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      url: page.urls.deleteCartItem,
+      data: JSON.stringify(obj)
+    })
+  }
+
+  page.commands.handleShowCart = () => {
+    page.elements.btnShowCart.on('click', () => {
+
+      page.elements.modalCarts.toggle("hide");
+
+      if(!isOpenCart) {
+        page.commands.getAllCartItems().then((data) => {
+          let items = data.items;
+
+          $('#cart-view-line').empty();
+
+          $.each(items, (index, item) => {
+            let str = AppBase.renderCartItem(item);
+            $('#cart-view-line').append(str);
+          })
+
+          $('#total-view-cart').text(data.totalAmount + ' đ');
+
+          page.commands.handleAddQuantity();
+
+          page.commands.handleMinusQuantity();
+
+          page.commands.handleChangeQuantity();
+        });
+      }
+
+      isOpenCart = !isOpenCart;
+    })
+  }
+
+  page.commands.handleAddQuantity = () => {
+    $('.cart-add-quantity').on('click', function () {
+      let productId = $(this).data('id');
+      let obj = {
+        productId,
+        quantity: 1
+      }
+
+      page.commands.addCartItem(obj)
+              .then((data) => {
+                let items = data.items;
+
+                $('#cart-view-line').empty();
+
+                $.each(items, (index, item) => {
+                  let str = AppBase.renderCartItem(item);
+                  $('#cart-view-line').append(str);
+                })
+
+                $('#total-view-cart').text(data.totalAmount + ' đ');
+
+                page.commands.handleAddQuantity();
+
+                page.commands.handleMinusQuantity();
+
+                page.commands.handleChangeQuantity();
+
+                AppBase.IziToast.showSuccessAlert('Cập nhật số lượng sản phẩm trong giỏ hàng thành công')
+              })
+              .catch(() => {
+                AppBase.IziToast.showErrorAlert('Cập nhật số lượng sản phẩm trong giỏ hàng thất bại');
+              });
+    })
+  }
+
+  page.commands.handleMinusQuantity = () => {
+    $('.cart-minus-quantity').on('click', function () {
+      let productId = $(this).data('id');
+      let obj = {
+        productId,
+        quantity: 1
+      }
+
+      page.commands.minusCartItem(obj)
+              .then((data) => {
+                let items = data.items;
+
+                $('#cart-view-line').empty();
+
+                $.each(items, (index, item) => {
+                  let str = AppBase.renderCartItem(item);
+                  $('#cart-view-line').append(str);
+                })
+
+                $('#total-view-cart').text(data.totalAmount + ' đ');
+
+                page.commands.handleAddQuantity();
+
+                page.commands.handleMinusQuantity();
+
+                page.commands.handleChangeQuantity();
+
+                AppBase.IziToast.showSuccessAlert('Cập nhật số lượng sản phẩm trong giỏ hàng thành công')
+              })
+              .catch(() => {
+                AppBase.IziToast.showErrorAlert('Cập nhật số lượng sản phẩm trong giỏ hàng thất bại');
+              });
+    })
+  }
+
+  page.commands.handleChangeQuantity = () => {
+    $('.cart-quantity').on('change', function (e) {
+      let quantity = +e.target.value;
+
+      let productId = $(this).data('id');
+
+      let obj = {
+        productId,
+        quantity: 0
+      }
+
+      if (quantity <= 0 || isNaN(quantity)) {
+        AppBase.showDeleteCartItemConfirmDialog().then((result) => {
+          if (result.isConfirmed) {
+            page.commands.deleteCartItem(obj)
+                    .then((data) => {
+                      let items = data.items;
+
+                      $('#cart-view-line').empty();
+
+                      $.each(items, (index, item) => {
+                        let str = AppBase.renderCartItem(item);
+                        $('#cart-view-line').append(str);
+                      })
+
+                      $('#total-view-cart').text(data.totalAmount + ' đ');
+
+                      page.commands.handleAddQuantity();
+
+                      page.commands.handleMinusQuantity();
+
+                      page.commands.handleChangeQuantity();
+
+                      AppBase.IziToast.showSuccessAlert('Cập nhật số lượng sản phẩm trong giỏ hàng thành công')
+                    })
+                    .catch(() => {
+                      AppBase.IziToast.showErrorAlert('Cập nhật số lượng sản phẩm trong giỏ hàng thất bại');
+                    });
+          }
+        });
+      }
+      else {
+        page.commands.changeQuantityCartItem(obj)
+                .then((data) => {
+                  let items = data.items;
+
+                  $('#cart-view-line').empty();
+
+                  $.each(items, (index, item) => {
+                    let str = AppBase.renderCartItem(item);
+                    $('#cart-view-line').append(str);
+                  })
+
+                  $('#total-view-cart').text(data.totalAmount + ' đ');
+
+                  page.commands.handleAddQuantity();
+
+                  page.commands.handleMinusQuantity();
+
+                  page.commands.handleChangeQuantity();
+
+                  AppBase.IziToast.showSuccessAlert('Cập nhật số lượng sản phẩm trong giỏ hàng thành công')
+                })
+                .catch(() => {
+                  AppBase.IziToast.showErrorAlert('Cập nhật số lượng sản phẩm trong giỏ hàng thất bại');
+                });
+      }
+
+
+    })
+  }
+
+  page.commands.handleCheckout = () => {
+    $('#btnCheckout').on('click', () => {
+      page.commands.checkout().then(() => {
+        AppBase.IziToast.showSuccessAlert("Thanh toán giỏ hàng thành công");
+
+        $('#cart-view-line').empty();
+      }).catch(() => {
+        AppBase.IziToast.showErrorAlert("Thanh toán giỏ hàng thất bại");
+      });
+    })
+  }
+
+  page.commands.checkout = () => {
+    return $.ajax({
+      type: 'POST',
+      url: page.urls.checkout
+    })
+  }
+
+  page.commands.getAllCartItems = () => {
+    return $.ajax({
+      type: 'GET',
+      url: page.urls.getAllCartItems
+    })
+            .done((data) => {
+              console.log(data)
+            }).fail((error) => {
+              console.log(error)
+            })
+  }
+
+  page.commands.loadData = () => {
+    page.commands.getAllProducts();
+  }
+
+  page.commands.initializeEventControl = () => {
+    $("a.nav-user").on("click", function (event) {
+      event.stopPropagation();
+      $(".profile-dropdown").slideToggle(250);
+    });
+
+    $(document).on("click", function () {
+      $(".profile-dropdown").hide();
+    });
+
+    page.commands.handleShowCart();
+
+    page.commands.handleCheckout();
+
+  }
+
+  $(() => {
+    // page.commands.loadData();
+
+    page.commands.initializeEventControl();
+  })
+
+</script>
+
+
+</body>
+
+
+</html>

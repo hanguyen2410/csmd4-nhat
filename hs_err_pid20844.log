@@ -1,0 +1,202 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 65536 bytes for Failed to commit area from 0x00000170790f0000 to 0x0000017079100000 of length 65536.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (./src/hotspot/os/windows/os_windows.cpp:3303), pid=20844, tid=35644
+#
+# JRE version:  (11.0.9.1+1) (build )
+# Java VM: OpenJDK 64-Bit Server VM (11.0.9.1+1, mixed mode, sharing, tiered, compressed oops, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_shmem,address=javadebug,suspend=y,server=n -XX:TieredStopAtLevel=1 -Xverify:none -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote -Dspring.jmx.enabled=true -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true -Dmanagement.endpoints.jmx.exposure.include=* -javaagent:C:\Users\sunri\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-1\223.8836.41\plugins\java\lib\rt\debugger-agent.jar -Dfile.encoding=UTF-8 com.cg.C1222SpbShoppingCartApplication
+
+Host: Intel(R) Core(TM) i7-10875H CPU @ 2.30GHz, 16 cores, 31G,  Windows 10 , 64 bit Build 19041 (10.0.19041.2788)
+Time: Thu May 11 11:31:38 2023 SE Asia Standard Time elapsed time: 0.027397 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000017061101000):  JavaThread "Unknown thread" [_thread_in_vm, id=35644, stack(0x00000043b8500000,0x00000043b8600000)]
+
+Stack: [0x00000043b8500000,0x00000043b8600000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x5f465a]
+V  [jvm.dll+0x77c78e]
+V  [jvm.dll+0x77de5f]
+V  [jvm.dll+0x77e523]
+V  [jvm.dll+0x2477c8]
+V  [jvm.dll+0x5f18ba]
+V  [jvm.dll+0x5e6505]
+V  [jvm.dll+0x2fca8c]
+V  [jvm.dll+0x2fc912]
+V  [jvm.dll+0x3016e0]
+V  [jvm.dll+0x345e78]
+V  [jvm.dll+0x345870]
+V  [jvm.dll+0x2d9ce8]
+V  [jvm.dll+0x2dae36]
+V  [jvm.dll+0x758137]
+V  [jvm.dll+0x7598bf]
+V  [jvm.dll+0x352c39]
+V  [jvm.dll+0x73b3c0]
+V  [jvm.dll+0x3ba30f]
+V  [jvm.dll+0x3bc7b1]
+C  [jli.dll+0x520b]
+C  [ucrtbase.dll+0x21bb2]
+C  [KERNEL32.DLL+0x17604]
+C  [ntdll.dll+0x526a1]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000001705ee17cd0, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x0000017061118800 GCTaskThread "GC Thread#0" [stack: 0x00000043b8600000,0x00000043b8700000] [id=35144]
+  0x0000017061197000 ConcurrentGCThread "G1 Main Marker" [stack: 0x00000043b8700000,0x00000043b8800000] [id=35516]
+  0x0000017061198800 ConcurrentGCThread "G1 Conc#0" [stack: 0x00000043b8800000,0x00000043b8900000] [id=35616]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffbdb259367]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00000170610fdf80] Heap_lock - owner thread: 0x0000017061101000
+
+Heap address: 0x0000000602e00000, size: 8146 MB, Compressed Oops mode: Non-zero based: 0x0000000602e00000
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (1 events):
+Event: 0.014 Loaded shared library C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\zip.dll
+
+
+Dynamic libraries:
+0x00007ff6a8a80000 - 0x00007ff6a8a8d000 	C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\java.exe
+0x00007ffc54210000 - 0x00007ffc54408000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffc52270000 - 0x00007ffc5232f000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffc519c0000 - 0x00007ffc51c9a000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x000000006bb80000 - 0x000000006beb1000 	C:\Program Files\Norton Security\{9C39360C-B057-46CD-B2CE-6625922DF99C}\NortonData\22.21.5.44\Definitions\IPSDefs\20230510.061\IPSEng64.dll
+0x00007ffc525d0000 - 0x00007ffc5267e000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffc54130000 - 0x00007ffc541ce000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffc53370000 - 0x00007ffc5340c000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffc52b60000 - 0x00007ffc52c86000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffc536a0000 - 0x00007ffc536a8000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffc51f00000 - 0x00007ffc52000000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffc3c6d0000 - 0x00007ffc3c6e7000 	C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\jli.dll
+0x00007ffc48dc0000 - 0x00007ffc48dd5000 	C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\VCRUNTIME140.dll
+0x00007ffc52360000 - 0x00007ffc524fd000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffc51ed0000 - 0x00007ffc51ef2000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffc52330000 - 0x00007ffc5235b000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffc51dc0000 - 0x00007ffc51ed0000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffc51920000 - 0x00007ffc519bd000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffc3b0b0000 - 0x00007ffc3b34a000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e\COMCTL32.dll
+0x00007ffc53fe0000 - 0x00007ffc54010000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffc023b0000 - 0x00007ffc0244b000 	C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\msvcp140.dll
+0x00007ffbdaf70000 - 0x00007ffbdbab3000 	C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\server\jvm.dll
+0x00007ffc2e920000 - 0x00007ffc2e929000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffc540c0000 - 0x00007ffc5412b000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffc45e00000 - 0x00007ffc45e0a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffc3cc00000 - 0x00007ffc3cc27000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffc4f980000 - 0x00007ffc4f992000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ffc3d8f0000 - 0x00007ffc3d900000 	C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\verify.dll
+0x00007ffc4f5b0000 - 0x00007ffc4f794000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ffc32190000 - 0x00007ffc321c4000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ffc52050000 - 0x00007ffc520d2000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffc3c6a0000 - 0x00007ffc3c6c8000 	C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\java.dll
+0x00007ffc3c690000 - 0x00007ffc3c69a000 	C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\jimage.dll
+0x00007ffc3ed10000 - 0x00007ffc3ed48000 	C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\jdwp.dll
+0x00007ffc4cce0000 - 0x00007ffc4ccee000 	C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\instrument.dll
+0x00007ffc10030000 - 0x00007ffc10047000 	C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\zip.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin;C:\WINDOWS\SYSTEM32;C:\Program Files\Norton Security\{9C39360C-B057-46CD-B2CE-6625922DF99C}\NortonData\22.21.5.44\Definitions\IPSDefs\20230510.061;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e;C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin\server
+
+VM Arguments:
+jvm_args: -agentlib:jdwp=transport=dt_shmem,address=javadebug,suspend=y,server=n -XX:TieredStopAtLevel=1 -Xverify:none -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote -Dspring.jmx.enabled=true -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true -Dmanagement.endpoints.jmx.exposure.include=* -javaagent:C:\Users\sunri\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-1\223.8836.41\plugins\java\lib\rt\debugger-agent.jar -Dfile.encoding=UTF-8 
+java_command: com.cg.C1222SpbShoppingCartApplication
+java_class_path (initial): F:\CODEGYM\CLASS\2022\C1222I1-JAVA\MD4\c1222-spb-shopping-cart\target\classes;C:\Users\sunri\.m2\repository\org\springframework\boot\spring-boot-starter-actuator\2.5.9\spring-boot-starter-actuator-2.5.9.jar;C:\Users\sunri\.m2\repository\org\springframework\boot\spring-boot-starter\2.5.9\spring-boot-starter-2.5.9.jar;C:\Users\sunri\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.5.9\spring-boot-starter-logging-2.5.9.jar;C:\Users\sunri\.m2\repository\ch\qos\logback\logback-classic\1.2.10\logback-classic-1.2.10.jar;C:\Users\sunri\.m2\repository\ch\qos\logback\logback-core\1.2.10\logback-core-1.2.10.jar;C:\Users\sunri\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.17.1\log4j-to-slf4j-2.17.1.jar;C:\Users\sunri\.m2\repository\org\apache\logging\log4j\log4j-api\2.17.1\log4j-api-2.17.1.jar;C:\Users\sunri\.m2\repository\org\slf4j\jul-to-slf4j\1.7.33\jul-to-slf4j-1.7.33.jar;C:\Users\sunri\.m2\repository\org\springframework\spring-core\5.3.15\spring-core-5.3.15.jar;C:\Users\sunri\.m2\repository\org\springframework\spring-jcl\5.3.15\spring-jcl-5.3.15.jar;C:\Users\sunri\.m2\repository\org\yaml\snakeyaml\1.28\snakeyaml-1.28.jar;C:\Users\sunri\.m2\repository\org\springframework\boot\spring-boot-actuator-autoconfigure\2.5.9\spring-boot-actuator-autoconfigure-2.5.9.jar;C:\Users\sunri\.m2\repository\org\springframework\boot\spring-boot-actuator\2.5.9\spring-boot-actuator-2.5.9.jar;C:\Users\sunri\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.12.6\jackson-datatype-jsr310-2.12.6.jar;C:\Users\sunri\.m2\repository\io\micrometer\micrometer-core\1.7.8\micrometer-core-1.7.8.jar;C:\Users\sunri\.m2\repository\org\hdrhistogram\HdrHistogram\2.1.12\HdrHistogram-2.1.12.jar;C:\Users\sunri\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\sunri\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\2.5.9\spring-boot-starter-data-jpa-2.5.9.jar;C:\Users\sunri\.m2\reposi
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     bool BytecodeVerificationLocal                = false                                     {product} {command line}
+     bool BytecodeVerificationRemote               = false                                     {product} {command line}
+     intx CICompilerCount                          = 12                                        {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 13                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 2097152                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 534773760                                 {product} {ergonomic}
+     bool ManagementServer                         = true                                      {product} {command line}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 8541700096                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 2097152                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 12163472                               {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 239494768                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 0                                      {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     intx TieredStopAtLevel                        = 1                                         {product} {command line}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=F:\DevProgram\Java\jdk-15.0.1
+PATH=C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Python39\Scripts\;C:\Python39\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\ProgramData\chocolatey\bin;C:\Users\sunri\AppData\Local\Android\Sdk\platform-tools;F:\DevProgram\Java\jdk-15.0.1\bin;C:\APACHE\apache-maven-3.8.1\bin;C:\DevPrograms\laragon\bin\php\php-7.2.19-Win32-VC15-x64;C:\ProgramData\ComposerSetup\bin;C:\Users\sunri\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\APACHE\apache-tomcat-9.0.46\bin;F:\DevEnvironment\Gradle\gradle-6.8.2\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\ArangoDB3e 3.9.0\usr\bin;C:\Program Files\heroku\bin;C:\Users\sunri\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\NetSarang\Xshell 7\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Git\cmd;E:\CICD\OpenSSH;C:\Program Files\Cloudflare\Cloudflar
+USERNAME=sunri
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 19041 (10.0.19041.2788)
+OS uptime: 2 days 13:37 hours
+HyperV virtualization detected
+
+CPU:total 16 (initial active 16) (8 cores per cpu, 2 threads per core) family 6 model 165 stepping 2, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx, fma
+
+Memory: 4k page, system-wide physical 32583M (7579M free)
+TotalPageFile size 32583M (AvailPageFile size 4M)
+current process WorkingSet (physical memory assigned to process): 28M, peak: 28M
+current process commit charge ("private bytes"): 597M, peak: 597M
+
+vm_info: OpenJDK 64-Bit Server VM (11.0.9.1+1) for windows-amd64 JRE (11.0.9.1+1), built on Nov 10 2020 15:18:49 by "" with MS VC++ 15.9 (VS2017)
+
+END.
